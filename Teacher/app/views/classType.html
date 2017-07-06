@@ -1,0 +1,12 @@
+<div class="row" ng-controller="ClassTypeCtrl">
+    <div class="col-md-12" id="classType">
+        <div class="list-group">
+            <a href="javascript:void(0);" class="list-group-item active">
+				所有课程
+            </a>
+            <div ng-repeat="class in classes">
+                <a href="javascript:void(0);" ui-sref="home.grade({cno:class.cno})" class="list-group-item">{{class.cname}}</a>
+            </div>
+        </div>
+    </div>
+</div>

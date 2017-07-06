@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+
+  <script type="text/javascript" src="jquery-easyui-1.4.3/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="jquery-easyui-1.4.3/jquery.easyui.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="jquery-easyui-1.4.3/easyloader.js"></script>
+  <link rel="stylesheet" href="jquery-easyui-1.4.3/themes/default/easyui.css" type="text/css"></link>
+  
+  <link rel="stylesheet" href="jquery-easyui-1.4.3/themes/icon.css" type="text/css"></link>
+  <script type="text/javascript" src="jquery-easyui-1.4.3/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+  </head>
+    <body class="easyui-layout">
+<script type="text/javascript">
+    var index = 0;
+    function addPanel(url,title){
+      if(!$('#tt').tabs('exists', title)){
+        var content="<iframe frameborder='0' scrolling='auto' style='width:100%;height:100%' src="+url+"></iframe>";
+        $('#tt').tabs('add',{
+          title: title,
+          content:content,
+          closable: true,
+          selected:true
+        });
+
+      }else{
+        $('#tabs').tabs('select', title);
+      }
+    }
+    function removePanel(){
+      var tab = $('#tt').tabs('getSelected');
+      if (tab){
+        var index = $('#tt').tabs('getTabIndex', tab);
+        $('#tt').tabs('close', index);
+      }
+    }
+  </script>
+  
+    <div data-options="region:'north',title:'North Title',split:true" style="height:100px;"></div>
+    <div data-options="region:'south',title:'South Title',split:true" style="height:100px;"></div>
+    <div data-options="region:'east',title:'East',split:true" style="width:100px;"></div>
+    <div data-options="region:'west',title:'West',split:true" style="width:150px;">
+    <ul id="tt1" class="easyui-tree">
+    <li>
+        <span>管理</span>
+        <ul>
+          <li><span><a href="javascript:void(0)" onclick="addPanel('1.jsp','管理员信息')">管理员信息</a></span></li>  
+          <li><span><a href="javascript:void(0)" onclick="addPanel('center.html','学生管理')">学生管理</a></span></li>
+          <li><span><a href="javascript:void(0)" onclick="addPanel('tab1.jsp','教师管理')">教师管理</a></span></li>  
+          <li><span><a href="javascript:void(0)" onclick="addPanel('tab1.jsp','课程管理')">课程管理</a></span></li>
+          <li><span><a href="javascript:void(0)" onclick="addPanel('tab1.jsp','权限设置')">权限设置</a></span></li>
+        </ul>
+      
+    </div>
+    <div id="tt" data-options="region:'center',title:'center title'"  class="easyui-tabs" style="padding:5px;background:#eee;">
+
+   <!--  <div title="Tab1" style="padding:20px;display:none;">
+       tab1
+   </div> -->
+    </div>
+    
+  </body>
+</html>

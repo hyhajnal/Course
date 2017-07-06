@@ -1,0 +1,42 @@
+<div class="col-md-6 col-md-offset-3">
+   <div class="panel panel-primary " >
+      <div class="panel-heading">
+         <h3 class="panel-title">关于我</h3>
+      </div>
+      <p class="text-center">
+         <br>
+         <img src="../images/head.jpg" height="343" width="500" class="img-rounded">
+      </p>
+      <div class="panel-body text-center" >
+          <ul class="list-group per_input">
+            <!-- <p ng-show="hidden" ng-model="teacher.tno"></p> -->
+            <li class="list-group-item">
+               <span>姓名：</span>
+               <input type="text" name="tname" ng-model="teacher.tname"  value="" required>
+            </li>
+            <li class="list-group-item">
+               <span>性别：</span>
+               <input type="text" name="tsex" ng-model="teacher.tsex"  value="" required>
+            </li>
+            <li class="list-group-item">
+               <span>年龄：</span>
+               <input type="text" name="tage" ng-model="teacher.tage"  value="" required>
+            </li>
+            <li class="list-group-item">
+               <span>职称：</span>
+               <input type="text" name="pro" ng-model="teacher.pro"  value="" required>
+            </li>
+            <li class="list-group-item">
+               <span>密码：</span>
+               <input type="text" name="tpsd" ng-model="teacher.tpsd"  value="" required>
+            </li>
+            <li class="list-group-item">
+               <span>简介：</span>
+               <textarea rows="5" ng-model="teacher.tinfo"></textarea>  
+            </li>
+
+         </ul>
+      </div>
+      <p class="text-center"><button type="button" class="btn btn-primary btn-lg" ng-click="editSubmit()">提交</button></p>
+   </div>
+</div>

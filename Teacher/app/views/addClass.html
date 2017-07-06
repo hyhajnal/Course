@@ -1,0 +1,38 @@
+<div class="container col-md-6 col-md-offset-3" >
+  <h2>添加我的课程</h2>
+  <form role="form" ng-submit="addTodo()" >
+    <div class="row">
+      <div class="input-group">
+        <!-- <span class="input-group-btn"> 
+          <select ng-model="engineer.currentActivity" class="form-control"
+              ng-options="act for act in activities">               
+          </select>
+        </span> -->
+        <span class="input-group-addon" id="basic-addon3">
+          <select ng-model="new.title" ng-options="act for act in activities"></select>
+        </span>
+        <input type="text" ng-model="new.content" required  placeholder="根据选项填内容" class="form-control">
+        <span class="input-group-btn"> 
+          <input type="submit" value="Add" class="btn btn-primary">
+        </span>
+      </div>
+    </div>   
+  </form>
+
+  <p></p>
+<!-- Todos list -->
+  <div  ng-model="items">
+    <p class="input-group" ng-repeat="item in items track by $index" style="padding:5px 10px;">
+    	  <span class="input-group-addon">{{item.title}}</span>
+        <input type="text" ng-model="item.content" class="form-control">
+        <span class="input-group-btn">
+            <button class="btn btn-danger" ng-click="removeTodo($index)" aria-label="Remove">X</button>
+        </span> 
+    </p>
+  </div>
+
+  <button class="btn btn-primary text-center" ng-click="save()">保存课程</button>
+
+
+
+</div>

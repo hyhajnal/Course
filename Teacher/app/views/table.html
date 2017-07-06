@@ -1,0 +1,83 @@
+<div class="container col-md-8 col-md-offset-2">
+   <div class="panel panel-primary ">
+      <div class="panel-heading">
+         <h3 class="panel-title">周一</h3>
+      </div>
+      <table class="table">
+         <th>课程名</th>
+         <th>教室</th>
+         <th>学时</th>
+         <th>课时</th>
+         <th>教学安排</th>
+         <tr ng-repeat="Mon in Mons">
+            <td>{{Mon.cname}}</td><td>{{Mon.cadd}}</td><td>{{Mon.clong}}</td>
+            <td>{{Mon.ctime}}</td><td><button class="btn btn-info btn-sm" ng-click="detail(Mon.cinfo,Mon.cno)">点击详情</button></td>
+         </tr>
+      </table>
+   </div>
+   <div class="panel panel-success ">
+      <div class="panel-heading">
+         <h3 class="panel-title">周二</h3>
+      </div>
+      <table class="table">
+         <th>课程名</th>
+         <th>教室</th>
+         <th>学时</th>
+         <th>课时</th>
+         <th>教学安排</th>
+         <tr ng-repeat="Tue in Tues">
+            <td>{{Tue.cname}}</td><td>{{Tue.cadd}}</td><td>{{Tue.clong}}</td>
+            <td>{{Tue.ctime}}</td><td><button class="btn btn-info btn-sm" ng-click="detail(Tue.cinfo,Tue.cno)">点击详情</button></td>
+         </tr>
+      </table>
+   </div>
+   <div class="panel panel-info ">
+      <div class="panel-heading">
+         <h3 class="panel-title">周三</h3>
+      </div>
+      <table class="table">
+         <th>课程名</th>
+         <th>教室</th>
+         <th>学时</th>
+         <th>课时</th>
+         <th>教学安排</th>
+         <tr ng-repeat="Wed in Weds">
+            <td>{{Wed.cname}}</td><td>{{Wed.cadd}}</td><td>{{Wed.clong}}</td>
+            <td>{{Wed.ctime}}</td><td><button class="btn btn-info btn-sm" ng-click="detail(Wed.cinfo,Wed.cno)">点击详情</button></td>
+         </tr>
+      </table>
+   </div>
+   <div class="panel panel-warning ">
+      <div class="panel-heading">
+         <h3 class="panel-title">周四</h3>
+      </div>
+      <table class="table">
+         <th>课程名</th>
+         <th>教室</th>
+         <th>学时</th>
+         <th>课时</th>
+         <th>教学安排</th>
+         <tr ng-repeat="Thr in Thrs">
+            <td>{{Thr.cname}}</td><td>{{Thr.cadd}}</td><td>{{Thr.clong}}</td>
+            <td>{{Thr.ctime}}</td><td><button class="btn btn-info btn-sm" ng-click="detail(Thr.cinfo,Thr.cno)">点击详情</button></td>
+         </tr>
+      </table>
+   </div>
+   <div class="panel panel-danger ">
+      <div class="panel-heading">
+         <h3 class="panel-title">周五</h3>
+      </div>
+      <table class="table">
+         <th>课程名</th>
+         <th>教室</th>
+         <th>学时</th>
+         <th>课时</th>
+         <th>教学安排</th>
+         <tr ng-repeat="Fri in Fris">
+            <td>{{Fri.cname}}</td><td>{{Fri.cadd}}</td><td>{{Fri.clong}}</td>
+            <td>{{Fri.ctime}}</td><td><button class="btn btn-info btn-sm" ng-click="detail(Fri.cinfo,Fri.cno)">点击详情</button></td>
+         </tr>
+      </table>
+   </div>
+</div>
+
