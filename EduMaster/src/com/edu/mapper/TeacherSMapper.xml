@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.mapper.TeacherSMapper" >
+	<select id="QueryCourse" parameterType="java.lang.String" resultType="com.edu.po.Course">
+		SELECT * FROM course WHERE tno=#{tno,jdbcType=VARCHAR}
+	</select>
+	<select id="QueryStuList" parameterType="java.lang.Integer" resultType="com.edu.pojo.Grade">
+		SELECT student.*,major.`dept`,major.`majorName`,selectcourse.`score` FROM student,selectcourse,major 
+			WHERE student.sno=selectcourse.`sno` AND cno=#{tno,jdbcType=INTEGER} AND student.`majorNum`=major.`majorNum`
+	</select>
+	<select id="QueryCourseTable" parameterType="java.util.Map" resultType="com.edu.po.Course">
+		SELECT *FROM course WHERE tno=#{tno} AND WEEKDAY=#{weekday}
+	</select>
+	<update id="updateGrade" parameterType="com.edu.po.Selectcourse">
+		UPDATE selectcourse SET score=#{score} WHERE cno=#{cno} AND sno=#{sno}
+	</update>
+</mapper>

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.edu.po.Course" >
+    <id column="cno" property="cno" jdbcType="INTEGER" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="majorInfo" property="majorinfo" jdbcType="VARCHAR" />
+    <result column="credit" property="credit" jdbcType="REAL" />
+    <result column="clong" property="clong" jdbcType="INTEGER" />
+    <result column="cadd" property="cadd" jdbcType="VARCHAR" />
+    <result column="weekday" property="weekday" jdbcType="CHAR" />
+    <result column="ctime" property="ctime" jdbcType="VARCHAR" />
+    <result column="tno" property="tno" jdbcType="VARCHAR" />
+    <result column="cimg" property="cimg" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.edu.po.Course" extends="BaseResultMap" >
+    <result column="cInfo" property="cinfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cno, cname, majorInfo, credit, clong, cadd, weekday, ctime, tno, cimg
+  </sql>
+  <sql id="Blob_Column_List" >
+    cInfo
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.edu.po.CourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.edu.po.CourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,cinfo
+    from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from course
+    where cno = #{cno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course
+    where cno = #{cno,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.edu.po.CourseExample" >
+    delete from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.edu.po.Course" >
+    insert into course (cno, cname, majorInfo, 
+      credit, clong, cadd, weekday, 
+      ctime, tno, cimg, cInfo
+      )
+    values (#{cno,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{majorinfo,jdbcType=VARCHAR}, 
+      #{credit,jdbcType=REAL}, #{clong,jdbcType=INTEGER}, #{cadd,jdbcType=VARCHAR}, #{weekday,jdbcType=CHAR}, 
+      #{ctime,jdbcType=VARCHAR}, #{tno,jdbcType=VARCHAR}, #{cimg,jdbcType=VARCHAR}, #{cinfo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.edu.po.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cno != null" >
+        cno,
+      </if>
+      <if test="cname != null" >
+        cname,
+      </if>
+      <if test="majorinfo != null" >
+        majorInfo,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="clong != null" >
+        clong,
+      </if>
+      <if test="cadd != null" >
+        cadd,
+      </if>
+      <if test="weekday != null" >
+        weekday,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="tno != null" >
+        tno,
+      </if>
+      <if test="cimg != null" >
+        cimg,
+      </if>
+      <if test="cinfo != null" >
+        cInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cno != null" >
+        #{cno,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null" >
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="majorinfo != null" >
+        #{majorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=REAL},
+      </if>
+      <if test="clong != null" >
+        #{clong,jdbcType=INTEGER},
+      </if>
+      <if test="cadd != null" >
+        #{cadd,jdbcType=VARCHAR},
+      </if>
+      <if test="weekday != null" >
+        #{weekday,jdbcType=CHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null" >
+        #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="cimg != null" >
+        #{cimg,jdbcType=VARCHAR},
+      </if>
+      <if test="cinfo != null" >
+        #{cinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.edu.po.CourseExample" resultType="java.lang.Integer" >
+    select count(*) from course
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update course
+    <set >
+      <if test="record.cno != null" >
+        cno = #{record.cno,jdbcType=INTEGER},
+      </if>
+      <if test="record.cname != null" >
+        cname = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.majorinfo != null" >
+        majorInfo = #{record.majorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.credit != null" >
+        credit = #{record.credit,jdbcType=REAL},
+      </if>
+      <if test="record.clong != null" >
+        clong = #{record.clong,jdbcType=INTEGER},
+      </if>
+      <if test="record.cadd != null" >
+        cadd = #{record.cadd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weekday != null" >
+        weekday = #{record.weekday,jdbcType=CHAR},
+      </if>
+      <if test="record.ctime != null" >
+        ctime = #{record.ctime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tno != null" >
+        tno = #{record.tno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cimg != null" >
+        cimg = #{record.cimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cinfo != null" >
+        cInfo = #{record.cinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update course
+    set cno = #{record.cno,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      majorInfo = #{record.majorinfo,jdbcType=VARCHAR},
+      credit = #{record.credit,jdbcType=REAL},
+      clong = #{record.clong,jdbcType=INTEGER},
+      cadd = #{record.cadd,jdbcType=VARCHAR},
+      weekday = #{record.weekday,jdbcType=CHAR},
+      ctime = #{record.ctime,jdbcType=VARCHAR},
+      tno = #{record.tno,jdbcType=VARCHAR},
+      cimg = #{record.cimg,jdbcType=VARCHAR},
+      cInfo = #{record.cinfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update course
+    set cno = #{record.cno,jdbcType=INTEGER},
+      cname = #{record.cname,jdbcType=VARCHAR},
+      majorInfo = #{record.majorinfo,jdbcType=VARCHAR},
+      credit = #{record.credit,jdbcType=REAL},
+      clong = #{record.clong,jdbcType=INTEGER},
+      cadd = #{record.cadd,jdbcType=VARCHAR},
+      weekday = #{record.weekday,jdbcType=CHAR},
+      ctime = #{record.ctime,jdbcType=VARCHAR},
+      tno = #{record.tno,jdbcType=VARCHAR},
+      cimg = #{record.cimg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.edu.po.Course" >
+    update course
+    <set >
+      <if test="cname != null" >
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="majorinfo != null" >
+        majorInfo = #{majorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=REAL},
+      </if>
+      <if test="clong != null" >
+        clong = #{clong,jdbcType=INTEGER},
+      </if>
+      <if test="cadd != null" >
+        cadd = #{cadd,jdbcType=VARCHAR},
+      </if>
+      <if test="weekday != null" >
+        weekday = #{weekday,jdbcType=CHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=VARCHAR},
+      </if>
+      <if test="tno != null" >
+        tno = #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="cimg != null" >
+        cimg = #{cimg,jdbcType=VARCHAR},
+      </if>
+      <if test="cinfo != null" >
+        cInfo = #{cinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where cno = #{cno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.edu.po.Course" >
+    update course
+    set cname = #{cname,jdbcType=VARCHAR},
+      majorInfo = #{majorinfo,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=REAL},
+      clong = #{clong,jdbcType=INTEGER},
+      cadd = #{cadd,jdbcType=VARCHAR},
+      weekday = #{weekday,jdbcType=CHAR},
+      ctime = #{ctime,jdbcType=VARCHAR},
+      tno = #{tno,jdbcType=VARCHAR},
+      cimg = #{cimg,jdbcType=VARCHAR},
+      cInfo = #{cinfo,jdbcType=LONGVARCHAR}
+    where cno = #{cno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.edu.po.Course" >
+    update course
+    set cname = #{cname,jdbcType=VARCHAR},
+      majorInfo = #{majorinfo,jdbcType=VARCHAR},
+      credit = #{credit,jdbcType=REAL},
+      clong = #{clong,jdbcType=INTEGER},
+      cadd = #{cadd,jdbcType=VARCHAR},
+      weekday = #{weekday,jdbcType=CHAR},
+      ctime = #{ctime,jdbcType=VARCHAR},
+      tno = #{tno,jdbcType=VARCHAR},
+      cimg = #{cimg,jdbcType=VARCHAR}
+    where cno = #{cno,jdbcType=INTEGER}
+  </update>
+</mapper>

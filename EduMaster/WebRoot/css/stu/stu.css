@@ -1,0 +1,69 @@
+#searchbar{
+	min-width: 600px;
+	height: 33px;
+	border: 1px solid #ccc;
+	margin: 0 auto;
+}
+
+#searchbar input{
+	border: none;
+	height: 100%;
+}
+
+select{
+	height:32px;
+}
+
+/* person.html */
+#pbg{
+	background:url('http://localhost:8080/EduMaster/images/wood.jpg');
+}
+#main_box{
+	margin: 0 auto;
+	width: 650px;
+	height: 350px;
+	 background: rgba(255,255,255,0.5);
+	position: relative;
+	margin-top: 10%;
+	padding: 60px 50px;
+	color: black;
+	font-size: 20px;
+	line-height: 50px;
+	font-weight: 900; 
+
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	/*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
+	-moz-box-shadow: 0px 0px 21px #000000;
+	-webkit-box-shadow: 0px 0px 21px #000000;
+	box-shadow: 0px 0px 21px #000000;
+	/*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
+
+
+}
+#editBtn{
+	width: 150px;
+	height: 40px;
+	background-color: #2F4F4F;
+	position: absolute;
+	left: 55%;
+	top:78%;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	color: #fff;
+	line-height: 40px;
+}
+
+#main_box input{
+	width: 155px;
+	height: 30px;
+	background: rgba(255,255,255);
+	border-radius: 5px;
+	text-indent: 3px;
+}
+
+.spacing{
+	letter-spacing:1em;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.mapper.StudentCustomMapper" >
+	<resultMap id="stuInfoResultMap" type="com.edu.po.StudentCustom" >
+	    <id column="sno" property="sno" jdbcType="VARCHAR" />
+	    <result column="ssex" property="ssex" jdbcType="CHAR" />
+	    <result column="sname" property="sname" jdbcType="VARCHAR" />
+	    <result column="spsd" property="spsd" jdbcType="VARCHAR" />
+	    <result column="majorNum" property="majornum" jdbcType="VARCHAR" />
+	    <result column="sgrade" property="sgrade" jdbcType="INTEGER" />
+	    
+	    <association property="major"  javaType="com.edu.po.Major"
+			select="com.edu.mapper.MajorMapper.selectByPrimaryKey" column="majorNum">
+			<!-- 实现对用户信息进行延迟加载 -->
+		</association>
+	    
+	</resultMap>
+	  <select id="findStuInfo" parameterType="java.lang.String" resultMap="stuInfoResultMap">
+	  	select *from student where sno=#{value}
+	  </select>
+</mapper>

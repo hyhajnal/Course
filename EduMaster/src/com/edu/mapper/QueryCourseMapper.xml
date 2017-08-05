@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.mapper.QueryCourseMapper" >
+ <select id="QueryCourse" parameterType="com.edu.po.CourseVo" resultType="com.edu.po.Course">  
+    select * from course  
+    <where>  
+        <if test="cname != null and cname !=''">  
+            cname=#{cname}  
+        </if>  
+        <if test="weekday != null and weekday !='' ">  
+            and weekday=#{weekday}  
+        </if>  
+        <if test="majorInfo != null and majorInfo !=''">  
+            and majorInfo LIKE "%"#{majorInfo}"%"  
+        </if>
+        <if test="tnos != null">  
+            and tno in
+            <foreach collection="tnos" index="index" item="item" open="(" separator="," close=")">  
+		        #{item}  
+		    </foreach>   
+        </if>   
+    </where> 
+    <if test="pageSize>0 and currentPage>0">
+    	LIMIT #{f_jilu},#{l_jilu}
+    </if>   
+</select> 
+
+<select id="QueryHavingCourse" parameterType="java.util.Map" resultType="com.edu.po.Course">  
+	SELECT *FROM course WHERE cno IN(
+		SELECT cno FROM selectcourse WHERE score IS NULL AND sno=#{sno}
+			)AND WEEKDAY=#{weekday}
+</select>
+
+<select id="QueryHavedCourse" parameterType="java.util.Map" resultType="com.edu.po.Score">  
+	SELECT selectcourse.cno,cname,score
+		FROM course,selectcourse WHERE selectcourse.`cno`=course.`cno` 
+			 AND sno=#{sno} AND score IS NOT NULL
+</select>
+
+<select id="findTid" parameterType="java.lang.String" resultType="java.lang.String">  
+	SELECT tno FROM teacher WHERE tname LIKE "%"#{tname}"%" 
+</select>
+
+<select id="classConfirm" parameterType="java.util.Map" resultType="com.edu.po.Selectcourse">  
+	SELECT * FROM selectcourse WHERE cno=#{cno} AND sno=#{sno} AND score IS NULL
+</select>
+
+</mapper>

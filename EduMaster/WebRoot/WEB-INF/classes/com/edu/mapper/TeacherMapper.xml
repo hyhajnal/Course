@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.edu.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.edu.po.Teacher" >
+    <id column="tno" property="tno" jdbcType="VARCHAR" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="tsex" property="tsex" jdbcType="CHAR" />
+    <result column="tage" property="tage" jdbcType="INTEGER" />
+    <result column="tpsd" property="tpsd" jdbcType="VARCHAR" />
+    <result column="timg" property="timg" jdbcType="VARCHAR" />
+    <result column="majorInfo" property="majorinfo" jdbcType="VARCHAR" />
+    <result column="pro" property="pro" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.edu.po.Teacher" extends="BaseResultMap" >
+    <result column="tInfo" property="tinfo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tno, tname, tsex, tage, tpsd, timg, majorInfo, pro
+  </sql>
+  <sql id="Blob_Column_List" >
+    tInfo
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.edu.po.TeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.edu.po.TeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from teacher
+    where tno = #{tno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from teacher
+    where tno = #{tno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.edu.po.TeacherExample" >
+    delete from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.edu.po.Teacher" >
+    insert into teacher (tno, tname, tsex, 
+      tage, tpsd, timg, majorInfo, 
+      pro, tInfo)
+    values (#{tno,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}, #{tsex,jdbcType=CHAR}, 
+      #{tage,jdbcType=INTEGER}, #{tpsd,jdbcType=VARCHAR}, #{timg,jdbcType=VARCHAR}, #{majorinfo,jdbcType=VARCHAR}, 
+      #{pro,jdbcType=VARCHAR}, #{tinfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.edu.po.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tno != null" >
+        tno,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+      <if test="tsex != null" >
+        tsex,
+      </if>
+      <if test="tage != null" >
+        tage,
+      </if>
+      <if test="tpsd != null" >
+        tpsd,
+      </if>
+      <if test="timg != null" >
+        timg,
+      </if>
+      <if test="majorinfo != null" >
+        majorInfo,
+      </if>
+      <if test="pro != null" >
+        pro,
+      </if>
+      <if test="tinfo != null" >
+        tInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tno != null" >
+        #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null" >
+        #{tsex,jdbcType=CHAR},
+      </if>
+      <if test="tage != null" >
+        #{tage,jdbcType=INTEGER},
+      </if>
+      <if test="tpsd != null" >
+        #{tpsd,jdbcType=VARCHAR},
+      </if>
+      <if test="timg != null" >
+        #{timg,jdbcType=VARCHAR},
+      </if>
+      <if test="majorinfo != null" >
+        #{majorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="pro != null" >
+        #{pro,jdbcType=VARCHAR},
+      </if>
+      <if test="tinfo != null" >
+        #{tinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.edu.po.TeacherExample" resultType="java.lang.Integer" >
+    select count(*) from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update teacher
+    <set >
+      <if test="record.tno != null" >
+        tno = #{record.tno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tname != null" >
+        tname = #{record.tname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsex != null" >
+        tsex = #{record.tsex,jdbcType=CHAR},
+      </if>
+      <if test="record.tage != null" >
+        tage = #{record.tage,jdbcType=INTEGER},
+      </if>
+      <if test="record.tpsd != null" >
+        tpsd = #{record.tpsd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timg != null" >
+        timg = #{record.timg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.majorinfo != null" >
+        majorInfo = #{record.majorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pro != null" >
+        pro = #{record.pro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tinfo != null" >
+        tInfo = #{record.tinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update teacher
+    set tno = #{record.tno,jdbcType=VARCHAR},
+      tname = #{record.tname,jdbcType=VARCHAR},
+      tsex = #{record.tsex,jdbcType=CHAR},
+      tage = #{record.tage,jdbcType=INTEGER},
+      tpsd = #{record.tpsd,jdbcType=VARCHAR},
+      timg = #{record.timg,jdbcType=VARCHAR},
+      majorInfo = #{record.majorinfo,jdbcType=VARCHAR},
+      pro = #{record.pro,jdbcType=VARCHAR},
+      tInfo = #{record.tinfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update teacher
+    set tno = #{record.tno,jdbcType=VARCHAR},
+      tname = #{record.tname,jdbcType=VARCHAR},
+      tsex = #{record.tsex,jdbcType=CHAR},
+      tage = #{record.tage,jdbcType=INTEGER},
+      tpsd = #{record.tpsd,jdbcType=VARCHAR},
+      timg = #{record.timg,jdbcType=VARCHAR},
+      majorInfo = #{record.majorinfo,jdbcType=VARCHAR},
+      pro = #{record.pro,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.edu.po.Teacher" >
+    update teacher
+    <set >
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null" >
+        tsex = #{tsex,jdbcType=CHAR},
+      </if>
+      <if test="tage != null" >
+        tage = #{tage,jdbcType=INTEGER},
+      </if>
+      <if test="tpsd != null" >
+        tpsd = #{tpsd,jdbcType=VARCHAR},
+      </if>
+      <if test="timg != null" >
+        timg = #{timg,jdbcType=VARCHAR},
+      </if>
+      <if test="majorinfo != null" >
+        majorInfo = #{majorinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="pro != null" >
+        pro = #{pro,jdbcType=VARCHAR},
+      </if>
+      <if test="tinfo != null" >
+        tInfo = #{tinfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tno = #{tno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.edu.po.Teacher" >
+    update teacher
+    set tname = #{tname,jdbcType=VARCHAR},
+      tsex = #{tsex,jdbcType=CHAR},
+      tage = #{tage,jdbcType=INTEGER},
+      tpsd = #{tpsd,jdbcType=VARCHAR},
+      timg = #{timg,jdbcType=VARCHAR},
+      majorInfo = #{majorinfo,jdbcType=VARCHAR},
+      pro = #{pro,jdbcType=VARCHAR},
+      tInfo = #{tinfo,jdbcType=LONGVARCHAR}
+    where tno = #{tno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.edu.po.Teacher" >
+    update teacher
+    set tname = #{tname,jdbcType=VARCHAR},
+      tsex = #{tsex,jdbcType=CHAR},
+      tage = #{tage,jdbcType=INTEGER},
+      tpsd = #{tpsd,jdbcType=VARCHAR},
+      timg = #{timg,jdbcType=VARCHAR},
+      majorInfo = #{majorinfo,jdbcType=VARCHAR},
+      pro = #{pro,jdbcType=VARCHAR}
+    where tno = #{tno,jdbcType=VARCHAR}
+  </update>
+</mapper>
