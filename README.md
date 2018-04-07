@@ -10,11 +10,3 @@
 * 学生端 Jsp + jQuery
 * 后台(JAVA) Spring + SpringMVC + Mybatis + Mysql
 
-### 截图
-
-<img width="480" height="380" src="./demo/1-2
-.png"/>
-
-### 其他
-[选课系统设计说明](./course.pages)
-
